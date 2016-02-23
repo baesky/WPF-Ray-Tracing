@@ -1,10 +1,10 @@
 ﻿using MathNet.Spatial.Euclidean;
 
-namespace WPFRayTracing.RayTrace
+namespace WPFRayTracing
 {
-    class Ray
+    public class Ray
     {
-        public Point3D Origin { get; set; }
+        public Vector3D Origin { get; set; }
 
         public Vector3D Direction { get; set; };
              
