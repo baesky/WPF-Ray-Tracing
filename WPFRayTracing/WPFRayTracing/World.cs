@@ -6,7 +6,7 @@ namespace WPFRayTracing
     {
         ViewPlane VP;
         Vector3D BackgroundColor;
-        Sphere sphere;
+        public Sphere TestSphere;
 
         public World(){ }
         public void Build()
