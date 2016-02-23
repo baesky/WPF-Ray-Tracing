@@ -6,15 +6,15 @@ namespace WPFRayTracing
     {
         public Vector3D Origin { get; set; }
 
-        public Vector3D Direction { get; set; };
+        public Vector3D Direction { get; set; }
              
         public Ray()
         {
-            Origin = new Point3D(0,0,0);
+            Origin = new Vector3D(0,0,0);
             Direction = new Vector3D(0,0,0);
         }
 
-        public Ray(ref Point3D o, ref Vector3D d)
+        public Ray(ref Vector3D o, ref Vector3D d)
         {
             Origin = o;
             Direction = d;

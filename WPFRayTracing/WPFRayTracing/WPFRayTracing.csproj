@@ -70,6 +70,8 @@
     <Compile Include="Geometry\Sphere.cs" />
     <Compile Include="Materials.cs" />
     <Compile Include="RayTrace\Ray.cs" />
+    <Compile Include="ViewPlane.cs" />
+    <Compile Include="World.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
