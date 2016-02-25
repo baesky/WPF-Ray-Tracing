@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="WPFRayTracing" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <local:PresentationControl>
-        </local:PresentationControl>
+        <Image>
+        </Image>
     </Grid>
 </Window>
