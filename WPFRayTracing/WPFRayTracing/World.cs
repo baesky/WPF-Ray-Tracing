@@ -1,12 +1,18 @@
 ﻿using MathNet.Spatial.Euclidean;
+using System.Collections.Generic;
 
 namespace WPFRayTracing
 {
     public class World
     {
-        ViewPlane VP;
-        Vector3D BackgroundColor;
-        public Sphere TestSphere;
+        public ViewPlane            VP;
+        public Vector3D             BackgroundColor;
+        public Tracer               RayTracer;
+        public Light                AmbientLight;
+        public Camera               Cam;
+        public List<GeometryObject> Objects;
+        public List<Light>          Lights;
+        public Sphere               TestSphere;
 
         public World(){ }
         public void Build()
