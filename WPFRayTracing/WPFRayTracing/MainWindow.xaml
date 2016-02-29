@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="WPFRayTracing" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Image>
+        <Button Margin="0,0,718,533" Click="Render_Button_Click">Render</Button>
+        <Image x:Name="FinalOutput">
         </Image>
     </Grid>
 </Window>

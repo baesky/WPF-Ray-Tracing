@@ -24,5 +24,11 @@ namespace WPFRayTracing
         {
             InitializeComponent();
         }
+
+        private void Render_Button_Click(object sender, RoutedEventArgs e)
+        {
+            FinalOutput = ((App)Application.Current).MyWorld.VP.OutputImage;
+            ((App)Application.Current).MyWorld.RenderScene();
+        }
     }
 }

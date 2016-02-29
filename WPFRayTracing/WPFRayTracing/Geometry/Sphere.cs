@@ -10,6 +10,13 @@ namespace WPFRayTracing
             Center = new Vector3D ( 0, 0, 0);
             Radius = 1.0;
         }
+
+        public Sphere(Vector3D Center, double Radius)
+        {
+            this.Center = Center;
+            this.Radius = Radius;
+        }
+
         Vector3D Center { get; set; }
         double Radius { get; set; }
         static double Epsilon = 0.01;

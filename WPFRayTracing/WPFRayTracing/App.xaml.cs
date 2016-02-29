@@ -13,9 +13,13 @@ namespace WPFRayTracing
     /// </summary>
     public partial class App : Application
     {
+
+        public World MyWorld { set; get; }
+
         App()
         {
-            
+            MyWorld = new World();
+            MyWorld.Build();
         }
     }
 }
