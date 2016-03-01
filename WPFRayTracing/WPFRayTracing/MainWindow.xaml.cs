@@ -23,11 +23,16 @@ namespace WPFRayTracing
         public MainWindow()
         {
             InitializeComponent();
+
+            FinalOutput.Width = ((App)Application.Current).MyWorld.VP.HRes;
+            FinalOutput.Height = ((App)Application.Current).MyWorld.VP.VRes;
+            FinalOutput.Source = ViewPlane.BackBuffer;
+
         }
 
         private void Render_Button_Click(object sender, RoutedEventArgs e)
         {
-            FinalOutput = ((App)Application.Current).MyWorld.VP.OutputImage;
+            
             ((App)Application.Current).MyWorld.RenderScene();
         }
     }

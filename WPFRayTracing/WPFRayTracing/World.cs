@@ -16,7 +16,7 @@ namespace WPFRayTracing
 
         public World()
         {
-            VP = new ViewPlane(200, 200);
+            VP = new ViewPlane(500, 500);
         }
         public void Build()
         {
@@ -47,12 +47,13 @@ namespace WPFRayTracing
                     DisplayPixel(HPixel, VPixel, ref RGBColor);
                 }
             }
+
         }
         public void OpenWindow()
         { }
         public void DisplayPixel(int X, int Y, ref Vector3D Colors)
         {
-            VP.SetPixel(X, Y, Colors);
+            ViewPlane.SetPixel(X, Y, Colors);
         }
     }
 }

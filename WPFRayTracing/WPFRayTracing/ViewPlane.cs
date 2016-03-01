@@ -16,36 +16,39 @@ namespace WPFRayTracing
         public double Inv_Gamma { get { return 1.0 / Gamma; } }
         public bool ShowOutOfGamut { get; set; }
 
-        public Image OutputImage;
-        WriteableBitmap BackBuffer;
+        public static WriteableBitmap BackBuffer;
 
         public ViewPlane(int hres, int vres)
         {
             HRes = hres;
             VRes = vres;
-            OutputImage = new Image();
+         
             BackBuffer = new WriteableBitmap(HRes, VRes, 96, 96, PixelFormats.Bgra32, null);
-            OutputImage.Source = BackBuffer;
+ 
         }
 
-        public void SetPixel(int X, int Y, Vector3D Color)
+        public static void SetPixel(int X, int Y, Vector3D Color)
         {
+
             BackBuffer.Lock();
 
             unsafe
             {
                 int pBackBuffer = (int)BackBuffer.BackBuffer;
-                pBackBuffer += X * BackBuffer.BackBufferStride;
-                pBackBuffer += Y * 4;
+                pBackBuffer += Y * BackBuffer.BackBufferStride;
+                pBackBuffer += X * 4;
 
-                int ColorData = (int)(Color.X*255) << 16;
-                ColorData |= (int)(Color.Y * 255) << 8;
-                ColorData |= (int)(Color.Z * 255) << 4;
-                *((int*)pBackBuffer) = ColorData;
+                int ColorData = 255 << 24;
+                ColorData |= (int)(Color.X * 255.0) << 16;
+                ColorData |= (int)(Color.Y * 255.0) << 8;
+                ColorData |= (int)(Color.Z * 255.0);
+
+                * ((int*)pBackBuffer) = ColorData;
             }
 
             BackBuffer.AddDirtyRect(new Int32Rect(X, Y, 1, 1));
             BackBuffer.Unlock();
+
         }
     }
 }
