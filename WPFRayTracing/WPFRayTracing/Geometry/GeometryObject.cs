@@ -1,4 +1,4 @@
-﻿
+﻿using MathNet.Spatial.Euclidean;
 
 namespace WPFRayTracing
 {
@@ -22,6 +22,6 @@ namespace WPFRayTracing
         }
         public Materials Material { get; set; }
 
-
+        public Vector3D Color { get; set; } //debug only
     }
 }

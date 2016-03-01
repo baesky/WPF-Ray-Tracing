@@ -12,11 +12,11 @@ namespace WPFRayTracing
             WorldInstance = world;
         }
         ~Tracer() { }
-        public virtual ColorRGB TraceRay(Ray TestRay)
+        public virtual ColorRGB TraceRay(ref Ray TestRay)
         {
             return new ColorRGB(0, 0, 0);
         }
-        public virtual ColorRGB TraceRay(Ray TestRay, int Depth)
+        public virtual ColorRGB TraceRay(ref Ray TestRay, int Depth)
         {
             return new ColorRGB(0, 0, 0);
         }

@@ -15,7 +15,7 @@ namespace WPFRayTracing
         {
 
         }
-        public override ColorRGB TraceRay(Ray TestRay)
+        public override ColorRGB TraceRay(ref Ray TestRay)
         {
             ShaderRec SR = new ShaderRec(WorldInstance);
             double t = 0;
