@@ -77,6 +77,8 @@
     <Compile Include="RayTrace\Ray.cs" />
     <Compile Include="RayTrace\SingleSphere.cs" />
     <Compile Include="RayTrace\Tracer.cs" />
+    <Compile Include="Samplers\Jittered.cs" />
+    <Compile Include="Samplers\Sampler.cs" />
     <Compile Include="ViewPlane.cs" />
     <Compile Include="World.cs" />
     <Page Include="MainWindow.xaml">

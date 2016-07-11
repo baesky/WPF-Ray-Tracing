@@ -22,7 +22,7 @@ namespace WPFRayTracing
         {
             HRes = hres;
             VRes = vres;
-         
+            NumOfSample = 1;
             BackBuffer = new WriteableBitmap(HRes, VRes, 96, 96, PixelFormats.Bgra32, null);
  
         }

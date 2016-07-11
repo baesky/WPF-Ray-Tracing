@@ -23,7 +23,7 @@ namespace WPFRayTracing
 
             VP.PixelSize = 1.0;
             VP.Gamma = 1.0;
-            BackgroundColor = new Vector3D(0, 0, 0.3);
+            BackgroundColor = new Vector3D(0, 0, 0);
 
             RayTracer = new MultiObjects(this);
 
