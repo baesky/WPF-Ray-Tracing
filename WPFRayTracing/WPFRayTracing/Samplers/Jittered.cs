@@ -6,7 +6,7 @@ namespace WPFRayTracing.Samplers
 {
     public class Jittered : Sampler
     {
-        public Jittered(int NumSamles) : base(NumSamles) 
+        public Jittered(int NumSamples) : base(NumSamples) 
         {
             
         }
