@@ -48,6 +48,16 @@ namespace WPFRayTracing
             }
         }
 
+        public Vector3D SampleHemisphere()
+        {
+            Random rand = new Random();
+
+            if (Count % NumSamples == 0)                                   // start of a new pixel
+                RandomJump = (rand.Next() % NumSets) * NumSamples;
+
+            return (HemisphereSamples[RandomJump + ShuffledIndices[RandomJump + Count++ % NumSamples]]);
+        }
+
         /* the number of sample points in a set*/
         protected int NumSamples;
         /* the number of sample sets*/
