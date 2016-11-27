@@ -21,7 +21,7 @@ namespace WPFRayTracing
         double Radius { get; set; }
         static double Epsilon = 0.01;
 
-        public override bool Hit(Ray TheRay, ref double Param, ref ShaderRec SR)
+        public override bool Hit(Ray TheRay, ref double Param, ref ShadeRec SR)
         {
             Vector3D Temp = TheRay.Origin - Center;
             double a = TheRay.Direction.DotProduct(TheRay.Direction);

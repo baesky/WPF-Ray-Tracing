@@ -68,9 +68,9 @@ namespace WPFRayTracing
             Objects.Add(GeoObj);
         }
 
-        public ShaderRec HitBareBoneObjects(ref Ray TestRay)
+        public ShadeRec HitBareBoneObjects(ref Ray TestRay)
         {
-            ShaderRec SR = new ShaderRec(this);
+            ShadeRec SR = new ShadeRec(this);
             double t = 0.0;
             double tmin = double.MaxValue;
             foreach(GeometryObject Obj in Objects)

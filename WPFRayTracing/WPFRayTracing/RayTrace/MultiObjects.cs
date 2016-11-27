@@ -18,7 +18,7 @@ namespace WPFRayTracing
 
         public override Vector3D TraceRay(ref Ray TestRay)
         {
-            ShaderRec SR = WorldInstance.HitBareBoneObjects(ref TestRay);
+            ShadeRec SR = WorldInstance.HitBareBoneObjects(ref TestRay);
 
             if (SR.HitAnObject)
                 return SR.Color;

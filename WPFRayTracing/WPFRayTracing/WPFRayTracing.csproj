@@ -66,10 +66,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BRDF\BRDF.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Geometry\GeometryObject.cs" />
     <Compile Include="Geometry\Plane.cs" />
-    <Compile Include="Geometry\ShaderRec.cs" />
+    <Compile Include="Geometry\ShadeRec.cs" />
     <Compile Include="Geometry\Sphere.cs" />
     <Compile Include="Light.cs" />
     <Compile Include="Materials.cs" />

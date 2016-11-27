@@ -1,6 +1,7 @@
 ﻿using System;
 using MathNet.Spatial.Euclidean;
 using System.Collections.Generic;
+using MathNet.Numerics;
 
 namespace WPFRayTracing
 {
@@ -29,6 +30,24 @@ namespace WPFRayTracing
             return Samples[RandomJump + ShuffledIndices[RandomJump + Count++ % NumSamples]];
         }
 
+        public void MapSamplesToHemisphere(float P)
+        {
+            int Size = Samples.Count;
+            HemisphereSamples = new List<Vector3D>(NumSamples * NumSets);
+
+            for (int j = 0; j < Size; j++)
+            {
+                float cos_phi = (float)Trig.Cos(2.0 * Math.PI * Samples[j].X);
+                float sin_phi = (float)Trig.Sin(2.0 * Math.PI * Samples[j].X);
+                float cos_theta = (float)Math.Pow((1.0 - Samples[j].Y), 1.0 / (P + 1.0));
+                float sin_theta = (float)Math.Sqrt(1.0 - cos_theta * cos_theta);
+                float pu = sin_theta * cos_phi;
+                float pv = sin_theta * sin_phi;
+                float pw = cos_theta;
+                HemisphereSamples.Add(new Vector3D(pu, pv, pw));
+            }
+        }
+
         /* the number of sample points in a set*/
         protected int NumSamples;
         /* the number of sample sets*/
@@ -40,6 +59,8 @@ namespace WPFRayTracing
         /* the current number of sample points used*/
         protected int Count;
         /* random index jump*/
-        protected int RandomJump;  
+        protected int RandomJump;
+
+        protected List<Vector3D> HemisphereSamples;
     }
 }

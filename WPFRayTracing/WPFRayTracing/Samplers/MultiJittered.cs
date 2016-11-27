@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MathNet.Spatial.Euclidean;
 
-namespace WPFRayTracing.Samplers
+namespace WPFRayTracing
 {
     class MultiJittered : Sampler
     {

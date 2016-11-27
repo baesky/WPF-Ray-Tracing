@@ -16,7 +16,7 @@ namespace WPFRayTracing
         ~GeometryObject()
         { }
 
-        public virtual bool Hit(Ray TheRay, ref double Param, ref ShaderRec SR)
+        public virtual bool Hit(Ray TheRay, ref double Param, ref ShadeRec SR)
         {
             return false;
         }
