@@ -73,7 +73,8 @@
     <Compile Include="Geometry\Plane.cs" />
     <Compile Include="Geometry\ShadeRec.cs" />
     <Compile Include="Geometry\Sphere.cs" />
-    <Compile Include="Light.cs" />
+    <Compile Include="Light\Ambient.cs" />
+    <Compile Include="Light\Light.cs" />
     <Compile Include="Materials.cs" />
     <Compile Include="RayTrace\MultiObjects.cs" />
     <Compile Include="RayTrace\Ray.cs" />
