@@ -68,7 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="BRDF\BRDF.cs" />
     <Compile Include="BRDF\Lambertian.cs" />
-    <Compile Include="Camera.cs" />
+    <Compile Include="Camera\Camera.cs" />
     <Compile Include="Geometry\GeometryObject.cs" />
     <Compile Include="Geometry\Plane.cs" />
     <Compile Include="Geometry\ShadeRec.cs" />

@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFRayTracing"
         mc:Ignorable="d"
-        Title="WPFRayTracing" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="White">
+        Title="WPFRayTracing" Height="768" Width="1024" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="326*"/>
             <ColumnDefinition Width="71*"/>
         </Grid.ColumnDefinitions>
-        <Button Margin="0,0,576.365,533" Click="Render_Button_Click">Render</Button>
-        <Image x:Name="FinalOutput" Grid.ColumnSpan="2" />
+        <Button Margin="0,0,0,1" Click="Render_Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30">Render</Button>
+        <Image x:Name="FinalOutput" Margin="0,0,10,0" HorizontalAlignment="Right" Width="1008" Grid.ColumnSpan="2" />
     </Grid>
 </Window>

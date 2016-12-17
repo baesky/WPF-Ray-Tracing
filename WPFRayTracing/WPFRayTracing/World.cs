@@ -16,7 +16,7 @@ namespace WPFRayTracing
 
         public World()
         {
-            VP = new ViewPlane(512, 512);
+            VP = new ViewPlane(768, 768);
             Lights = new List<Light>(5);
         }
         public void Build()
