@@ -1,5 +1,4 @@
-﻿using System;
-using MathNet.Spatial.Euclidean;
+﻿using MathNet.Spatial.Euclidean;
 
 namespace WPFRayTracing
 {
@@ -15,7 +14,7 @@ namespace WPFRayTracing
             return Color.ScaleBy(ls);
         }
 
-        float ls { get; set; }
-        Vector3D Color { get; set; }
+        public float ls { get; set; }
+        public Vector3D Color { get; set; }
     }
 }

@@ -3,8 +3,13 @@ using MathNet.Spatial.Euclidean;
 
 namespace WPFRayTracing
 {
-    class Lambertian : BRDF
+    public class Lambertian : BRDF
     {
+        public Lambertian()
+        {
+            Kd = 0;
+            Cd = new Vector3D(0,0,0);
+        }
         public Lambertian(ref Lambertian OtherLambertian)
         {
             Kd = OtherLambertian.Kd;

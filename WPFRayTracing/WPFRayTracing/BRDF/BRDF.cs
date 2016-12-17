@@ -4,7 +4,7 @@ using MathNet.Spatial.Euclidean;
 
 namespace WPFRayTracing
 {
-    class BRDF
+    public class BRDF
     {
         public BRDF()
         { }

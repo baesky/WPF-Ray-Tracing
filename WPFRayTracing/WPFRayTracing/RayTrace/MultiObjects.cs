@@ -21,7 +21,10 @@ namespace WPFRayTracing
             ShadeRec SR = WorldInstance.HitBareBoneObjects(ref TestRay);
 
             if (SR.HitAnObject)
-                return SR.Color;
+            {
+                SR.Ray = TestRay;
+                return SR.Material.Shading(SR);
+            }
             else
                 return WorldInstance.BackgroundColor;
         }
