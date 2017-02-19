@@ -35,7 +35,7 @@ namespace WPFRayTracing
             return new Vector3D(0, 0, 0);
         }
 
-        public virtual Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo,ref Vector3D wi, float pdf)
+        public virtual Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo,ref Vector3D wi, double pdf)
         {
             return new Vector3D(0, 0, 0);
         }

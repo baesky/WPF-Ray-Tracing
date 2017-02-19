@@ -1,4 +1,5 @@
-﻿using MathNet.Spatial.Euclidean;
+﻿using MathNet.Numerics.LinearAlgebra;
+using MathNet.Spatial.Euclidean;
 using System.Collections.Generic;
 
 namespace WPFRayTracing
@@ -56,6 +57,8 @@ namespace WPFRayTracing
             SphereMat2.AmbientBRDF.Kd = 0.25f;
             SphereMat2.DiffuseBRDF.Kd = 0.75f;
             SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
+            SphereMat2.SpecularBRDF.Ks = 0.1f;
+            SphereMat2.SpecularBRDF.Cs = TestSphere2.Color;
             TestSphere2.Material = SphereMat2;
             AddRenderObjects(ref TestSphere2);
         }
@@ -82,7 +85,15 @@ namespace WPFRayTracing
         { }
         public void DisplayPixel(int X, int Y, ref Vector3D Colors)
         {
-            ViewPlane.SetPixel(X, Y, Colors);
+            Vector<double> Coords = Colors.ToVector();
+            if (Coords[0] > 1.0f)
+                Coords[0] /= Coords[0];
+            if (Coords[1] > 1.0f)
+                Coords[1] /= Coords[1];
+            if (Coords[2] > 1.0f)
+                Coords[2] /= Coords[2];
+
+            ViewPlane.SetPixel(X, Y, Vector3D.OfVector(Coords));
         }
 
         public void AddRenderObjects(ref GeometryObject GeoObj)

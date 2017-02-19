@@ -9,9 +9,11 @@ namespace WPFRayTracing
         {
             AmbientBRDF = new Lambertian();
             DiffuseBRDF = new Lambertian();
+            SpecularBRDF = new GlossySpecular();
         }
         public Lambertian AmbientBRDF { get; set; }
         public Lambertian DiffuseBRDF { get; set; }
+        public GlossySpecular SpecularBRDF { get; set; }
 
         public override Vector3D Shading(ShadeRec SR)
         {
@@ -25,7 +27,7 @@ namespace WPFRayTracing
                 double NDotWi = SR.Normal.DotProduct(Wi);
                 if(NDotWi > 0.0)
                 {
-                    RHO = DiffuseBRDF.Factor(ref SR, ref Wo, ref Wi);
+                    RHO = DiffuseBRDF.Factor(ref SR, ref Wo, ref Wi) + SpecularBRDF.Factor(ref SR, ref Wo, ref Wi);
                     LtFac = Lt.L(ref SR);
                     L += new Vector3D(RHO.X * LtFac.X * NDotWi, RHO.Y * LtFac.Y * NDotWi, RHO.Z * LtFac.Z * NDotWi); 
                 }
