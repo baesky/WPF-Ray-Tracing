@@ -19,7 +19,7 @@ namespace WPFRayTracing
             double RDotWo = r.DotProduct(wo);
 
             if (RDotWo > 0.0)
-                L = Cs.ScaleBy(Math.Pow(RDotWo, Exp)).ScaleBy(Ks);
+                L = new Vector3D(1,1,1).ScaleBy(Math.Pow(RDotWo, Exp)).ScaleBy(Ks);
 
             return L;
         }

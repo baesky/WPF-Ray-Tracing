@@ -48,6 +48,8 @@ namespace WPFRayTracing
             SphereMat.AmbientBRDF.Kd = 0.25f;
             SphereMat.DiffuseBRDF.Kd = 0.75f;
             SphereMat.DiffuseBRDF.Cd = TestSphere1.Color;
+            SphereMat.SpecularBRDF.Ks = 0.1f;
+            SphereMat.SpecularBRDF.Exp = 0.9f;
             TestSphere1.Material = SphereMat;
             AddRenderObjects(ref TestSphere1);
 
@@ -57,8 +59,8 @@ namespace WPFRayTracing
             SphereMat2.AmbientBRDF.Kd = 0.25f;
             SphereMat2.DiffuseBRDF.Kd = 0.75f;
             SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
-            SphereMat2.SpecularBRDF.Ks = 0.1f;
-            SphereMat2.SpecularBRDF.Cs = TestSphere2.Color;
+            SphereMat2.SpecularBRDF.Ks = 0.25f;
+            SphereMat2.SpecularBRDF.Exp = 2.0f;
             TestSphere2.Material = SphereMat2;
             AddRenderObjects(ref TestSphere2);
         }
