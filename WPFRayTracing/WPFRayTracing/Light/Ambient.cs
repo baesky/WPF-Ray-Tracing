@@ -16,5 +16,10 @@ namespace WPFRayTracing
 
         public float ls { get; set; }
         public Vector3D Color { get; set; }
+
+        public bool bCastShadow { get { return false; } }
+        public bool EnableCastShadow() { return bCastShadow; }
+        public bool CheckInShadow(ref Ray ShadowRay, ref ShadeRec SR)
+        { return false; }
     }
 }

@@ -26,5 +26,19 @@ namespace WPFRayTracing
             else
                 return false;
         }
+
+        public override bool ShadowHit(ref Ray RayDir, ref float HitPos)
+        {
+            double t = (PassthoughPoint - RayDir.Origin).DotProduct(Normal) / RayDir.Direction.DotProduct(Normal);
+
+            if (t > Epsilon)
+            {
+                HitPos = (float)t;
+                return true;
+            }
+            else
+                return false;
+        
+        }
     }
 }

@@ -23,5 +23,7 @@ namespace WPFRayTracing
         public Materials Material { get; set; }
 
         public Vector3D Color { get; set; } //debug only
+
+        public virtual bool ShadowHit(ref Ray RayDir, ref float HitPos) { return false; }
     }
 }

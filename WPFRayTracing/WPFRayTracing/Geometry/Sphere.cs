@@ -59,5 +59,40 @@ namespace WPFRayTracing
                 return false;
             }
         }
+
+        public override bool ShadowHit(ref Ray RayDir, ref float HitPos)
+        {
+            Vector3D Temp = RayDir.Origin - Center;
+            double a = RayDir.Direction.DotProduct(RayDir.Direction);
+            double b = 2.0 * Temp.DotProduct(RayDir.Direction);
+            double c = Temp.DotProduct(Temp) - Radius * Radius;
+            double disc = b * b - 4.0 * a * c;
+
+            if (disc < 0.0)
+                return false;
+            else
+            {
+                double e = Math.Sqrt(disc);
+                double denom = 2.0 * a;
+
+                double t = (-b - e) / denom;
+
+                if (t > Epsilon)
+                {
+                    HitPos = (float)t;
+                    return true;
+                }
+
+                t = (-b + e) / denom;
+
+                if (t > Epsilon)
+                {
+                    HitPos = (float)t;
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
 }
