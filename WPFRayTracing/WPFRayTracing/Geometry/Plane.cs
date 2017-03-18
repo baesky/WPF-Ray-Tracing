@@ -9,6 +9,13 @@ namespace WPFRayTracing
             PassthoughPoint = new Vector3D(0, 0, 0);
             Normal = new Vector3D(0, 1, 0);
         }
+
+        public Plane(Vector3D PassPoint, Vector3D Normal)
+        {
+            PassthoughPoint = PassPoint;
+            this.Normal = Normal;
+        }
+
         public Vector3D PassthoughPoint { get; set; }
         public Vector3D Normal { get; set; }
         static readonly double Epsilon = 0.001;

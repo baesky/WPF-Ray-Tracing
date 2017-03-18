@@ -47,7 +47,7 @@ namespace WPFRayTracing
             TestSphere1.Color = new Vector3D(1, 0, 0);
             Matte SphereMat = new Matte();
             SphereMat.AmbientBRDF.Kd = 1.0f;
-            SphereMat.AmbientBRDF.Cd = new Vector3D(0.1, 0.1, 0.1);
+            SphereMat.AmbientBRDF.Cd = new Vector3D(0.03, 0.03, 0.03);
             SphereMat.DiffuseBRDF.Kd = 0.75f;
             SphereMat.DiffuseBRDF.Cd = TestSphere1.Color;
             SphereMat.SpecularBRDF.Ks = 0.1f;
@@ -59,13 +59,25 @@ namespace WPFRayTracing
             TestSphere2.Color = new Vector3D(1, 1, 0);
             Matte SphereMat2 = new Matte();
             SphereMat2.AmbientBRDF.Kd = 1.0f;
-            SphereMat2.AmbientBRDF.Cd = new Vector3D(0.1, 0.1, 0.1);
+            SphereMat2.AmbientBRDF.Cd = new Vector3D(0.03, 0.03, 0.03);
             SphereMat2.DiffuseBRDF.Kd = 0.75f;
             SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
             SphereMat2.SpecularBRDF.Ks = 0.25f;
             SphereMat2.SpecularBRDF.Exp = 2.0f;
             TestSphere2.Material = SphereMat2;
             AddRenderObjects(ref TestSphere2);
+
+            GeometryObject TestPlane1 = new Plane(new Vector3D(0,-170,0), new Vector3D(0,0.5,1));
+            TestPlane1.Color = new Vector3D(1, 1, 1);
+            Matte PlaneMat1 = new Matte();
+            PlaneMat1.AmbientBRDF.Kd = 1.0f;
+            PlaneMat1.AmbientBRDF.Cd = new Vector3D(0.01, 0.01, 0.01);
+            PlaneMat1.DiffuseBRDF.Kd = 0.75f;
+            PlaneMat1.DiffuseBRDF.Cd = TestPlane1.Color;
+            PlaneMat1.SpecularBRDF.Ks = 0.25f;
+            PlaneMat1.SpecularBRDF.Exp = 2.0f;
+            TestPlane1.Material = PlaneMat1;
+            AddRenderObjects(ref TestPlane1);
         }
         public void RenderScene()
         {
