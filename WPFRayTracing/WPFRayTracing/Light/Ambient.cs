@@ -11,7 +11,7 @@ namespace WPFRayTracing
         public void SetSampler(ref Sampler TheSampler)
         {
             SamplerRef = TheSampler;
-            SamplerRef.MapSamplesToHemisphere(1);
+            SamplerRef.MapSamplesToHemisphere(32.0f);
         }
 
         public Vector3D L(ref ShadeRec sr)

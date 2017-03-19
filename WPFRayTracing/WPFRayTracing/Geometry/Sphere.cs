@@ -19,7 +19,7 @@ namespace WPFRayTracing
 
         Vector3D Center { get; set; }
         double Radius { get; set; }
-        static double Epsilon =  0.00001;
+        static readonly double Epsilon =  0.00001;
 
         public override bool Hit(Ray TheRay, ref double Param, ref ShadeRec SR)
         {
