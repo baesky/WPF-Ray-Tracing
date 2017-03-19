@@ -9,13 +9,40 @@ namespace WPFRayTracing
     {
         public Sampler(int SamplesNum)
         {
+            RandomJump = 0;
+            Count = 0;
+            NumSets = 83;
+            Samples = new List<Vector2D>();
             NumSamples = SamplesNum;
             Generate_Samples();
+            SetupShuffledIndex();
         }
 
         public virtual void Generate_Samples() { }
 
-        public void SetupShuffledIndex() { }
+        public void SetupShuffledIndex()
+        {
+            ShuffledIndices = new List<int>(NumSets * NumSamples);
+            List<int> Indices = new List<int>(NumSamples);
+            Random Rand = new Random();
+            for (int i = 0; i < NumSets; ++i)
+            {
+                
+                for (int k = 0; k < NumSamples; ++k)
+                {
+                    Indices.Add(k);
+                }
+
+                for (int j = 0; j < NumSamples; ++j)
+                {
+                    int Next = Rand.Next(Indices.Count);
+                    ShuffledIndices.Add(Indices[Next]);
+                    Indices.RemoveAt(Next);
+                }
+                
+            }
+
+        }
 
         public void ShuffleSamples() { }
 
@@ -37,8 +64,8 @@ namespace WPFRayTracing
 
             for (int j = 0; j < Size; j++)
             {
-                float cos_phi = (float)Trig.Cos(2.0 * Math.PI * Samples[j].X);
-                float sin_phi = (float)Trig.Sin(2.0 * Math.PI * Samples[j].X);
+                float cos_phi = (float)Math.Cos(2.0 * Math.PI * Samples[j].X);
+                float sin_phi = (float)Math.Sin(2.0 * Math.PI * Samples[j].X);
                 float cos_theta = (float)Math.Pow((1.0 - Samples[j].Y), 1.0 / (P + 1.0));
                 float sin_theta = (float)Math.Sqrt(1.0 - cos_theta * cos_theta);
                 float pu = sin_theta * cos_phi;
@@ -47,6 +74,7 @@ namespace WPFRayTracing
                 HemisphereSamples.Add(new Vector3D(pu, pv, pw));
             }
         }
+
 
         public Vector3D SampleHemisphere()
         {
@@ -61,7 +89,7 @@ namespace WPFRayTracing
         /* the number of sample points in a set*/
         protected int NumSamples;
         /* the number of sample sets*/
-        protected int NumSets;
+        protected readonly int  NumSets;
         /* sample points on a unit square*/
         protected List<Vector2D> Samples;
         /* shuffled samples array indices*/

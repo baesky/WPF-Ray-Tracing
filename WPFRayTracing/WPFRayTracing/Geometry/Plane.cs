@@ -18,7 +18,7 @@ namespace WPFRayTracing
 
         public Vector3D PassthoughPoint { get; set; }
         public Vector3D Normal { get; set; }
-        static readonly double Epsilon = 0.001;
+        static readonly double Epsilon = 0.00001;
         public override bool Hit(Ray TheRay, ref double Param, ref ShadeRec SR) 
         {
             double t = (PassthoughPoint - TheRay.Origin).DotProduct(Normal) / TheRay.Direction.DotProduct(Normal);

@@ -13,5 +13,6 @@
         </Grid.ColumnDefinitions>
         <Button Margin="0,0,0,1" Click="Render_Button_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30">Render</Button>
         <Image x:Name="FinalOutput" Margin="0,0,10,0" HorizontalAlignment="Right" Width="1008" Grid.ColumnSpan="2" />
+        <ProgressBar x:Name="RenderingProgress" HorizontalAlignment="Left" Height="10" Margin="0,35,0,0" VerticalAlignment="Top" Width="100" Maximum="100"/>
     </Grid>
 </Window>
