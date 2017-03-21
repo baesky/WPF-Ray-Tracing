@@ -19,9 +19,9 @@ namespace WPFRayTracing
             // fill the samples array with dummy points to allow us to use the [ ] notation when we set the 
             // initial patterns
 
-            Vector2D fill_point = new Vector2D();
+           // Vector2D fill_point = new Vector2D();
             for (int j = 0; j < NumSamples * NumSets; j++)
-                Samples.Add(fill_point);
+                Samples.Add(new Vector2D(rand.NextDouble(), rand.NextDouble()));
 
             // distribute points in the initial patterns
 
@@ -42,7 +42,9 @@ namespace WPFRayTracing
             // shuffle x coordinates
 
             for (int p = 0; p < NumSets; p++)
+            {
                 for (int i = 0; i < n; i++)
+                {
                     for (int j = 0; j < n; j++)
                     {
                         int k = rand.Next(j, n - 1);
@@ -50,6 +52,10 @@ namespace WPFRayTracing
                         Samples[i * n + j + p * NumSamples] = new Vector2D(Samples[i * n + k + p * NumSamples].X, Samples[i * n + j + p * NumSamples].Y);
                         Samples[i * n + k + p * NumSamples] = new Vector2D(t, Samples[i * n + k + p * NumSamples].Y);
                     }
+                }
+                    
+            }
+                
 
             // shuffle y coordinates
 

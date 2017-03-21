@@ -87,9 +87,9 @@ namespace WPFRayTracing
         }
 
         /* the number of sample points in a set*/
-        protected int NumSamples;
+        public int NumSamples;
         /* the number of sample sets*/
-        protected readonly int  NumSets;
+        public readonly int  NumSets;
         /* sample points on a unit square*/
         protected List<Vector2D> Samples;
         /* shuffled samples array indices*/
@@ -100,5 +100,7 @@ namespace WPFRayTracing
         protected int RandomJump;
 
         protected List<Vector3D> HemisphereSamples;
+
+        public int SampleCount { get { return Samples.Count; } }
     }
 }

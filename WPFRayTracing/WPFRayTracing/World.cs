@@ -27,11 +27,11 @@ namespace WPFRayTracing
             VP.Gamma = 1.0;
             BackgroundColor = new Vector3D(0, 0, 0);
 
-            Sampler AmbientSampler = new MultiJittered(1);
+            Sampler AmbientSampler = new MultiJittered(16);
             Ambient AmbLt = new Ambient();
-            AmbLt.ls = 1.0f;
+            AmbLt.ls = 0.15f;
             AmbLt.MinAmount = 0.0f;
-            AmbLt.Color = new Vector3D(0.1,0.1,0.8);
+            AmbLt.Color = new Vector3D(1.00,1.0,1.0);
             AmbLt.SetSampler(ref AmbientSampler);
             AmbientLight = AmbLt;
             
@@ -49,7 +49,7 @@ namespace WPFRayTracing
             GeometryObject TestSphere1 = new Sphere(new Vector3D(-60, -30, -30), 80.0);
             TestSphere1.Color = new Vector3D(1, 0, 0);
             Matte SphereMat = new Matte();
-            SphereMat.AmbientBRDF.Kd = 1.0f;
+            SphereMat.AmbientBRDF.Kd = 0.8f;
             SphereMat.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
             SphereMat.DiffuseBRDF.Kd = 0.75f;
             SphereMat.DiffuseBRDF.Cd = TestSphere1.Color;
@@ -70,12 +70,12 @@ namespace WPFRayTracing
             //TestSphere2.Material = SphereMat2;
             //AddRenderObjects(ref TestSphere2);
 
-            GeometryObject TestPlane1 = new Plane(new Vector3D(0, 0, -30), new Vector3D(0, 0, 1));
+            GeometryObject TestPlane1 = new Plane(new Vector3D(0, 0, -210), new Vector3D(0, 1, 0.5));
             TestPlane1.Color = new Vector3D(1, 1, 1);
             Matte PlaneMat1 = new Matte();
-            PlaneMat1.AmbientBRDF.Kd = 0.5f;
+            PlaneMat1.AmbientBRDF.Kd = 1.0f;
             PlaneMat1.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
-            PlaneMat1.DiffuseBRDF.Kd = 0.75f;
+            PlaneMat1.DiffuseBRDF.Kd = 0.8f;
             PlaneMat1.DiffuseBRDF.Cd = TestPlane1.Color;
             PlaneMat1.SpecularBRDF.Ks = 0.25f;
             PlaneMat1.SpecularBRDF.Exp = 2.0f;
@@ -131,7 +131,7 @@ namespace WPFRayTracing
 
             foreach(GeometryObject Obj in Objects)
             {
-                if(Obj.Hit(TestRay,ref t,ref SR) && t < tmin)
+                if(Obj.Hit(TestRay,ref t,ref SR) && (t < tmin))
                 {
                     SR.HitPoint = TestRay.Origin + t * TestRay.Direction;
                     SR.HitAnObject = true;
