@@ -25,5 +25,8 @@ namespace WPFRayTracing
         public Vector3D Color { get; set; } //debug only
 
         public virtual bool ShadowHit(ref Ray RayDir, ref float HitPos) { return false; }
+        public virtual float PDF(ref ShadeRec SR) { return 0.0f; }
+        public virtual Vector3D Sample() { return PreDefColor.BlackColor; }
+        public virtual Vector3D GetNormal(Vector3D SamplePt) { return PreDefColor.BlackColor; }
     }
 }

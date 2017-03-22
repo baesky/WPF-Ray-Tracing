@@ -55,5 +55,10 @@ namespace WPFRayTracing
             }
             return false;
         }
+
+        public float GeoTerms(ref ShadeRec SR)
+        { return 1.0f; }
+        public float PDF(ref ShadeRec SR)
+        { return 1.0f; }
     }
 }

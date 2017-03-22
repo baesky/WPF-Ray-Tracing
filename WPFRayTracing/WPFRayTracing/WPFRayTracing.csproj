@@ -76,10 +76,13 @@
     <Compile Include="Geometry\ShadeRec.cs" />
     <Compile Include="Geometry\Sphere.cs" />
     <Compile Include="Light\Ambient.cs" />
+    <Compile Include="Light\AreaLight.cs" />
     <Compile Include="Light\Directional.cs" />
     <Compile Include="Light\Light.cs" />
+    <Compile Include="Material\Emissive.cs" />
     <Compile Include="Material\Materials.cs" />
     <Compile Include="Material\Matte.cs" />
+    <Compile Include="RayTrace\AreaLighting.cs" />
     <Compile Include="RayTrace\MultiObjects.cs" />
     <Compile Include="RayTrace\Ray.cs" />
     <Compile Include="RayTrace\SingleSphere.cs" />

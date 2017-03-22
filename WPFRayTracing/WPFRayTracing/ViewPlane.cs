@@ -17,7 +17,7 @@ namespace WPFRayTracing
         public bool ShowOutOfGamut { get; set; }
 
         public Sampler SamplerRef { get; set; }
-
+        public int MaxDepth { get; set; }
         public static WriteableBitmap BackBuffer;
 
         public ViewPlane(int hres, int vres)
@@ -29,6 +29,7 @@ namespace WPFRayTracing
             SamplerRef = new MultiJittered(16);
             NumOfSample = SamplerRef.NumSamples; 
             SamplerRef.Generate_Samples();
+            MaxDepth = 2;
         }
 
         public static void SetPixel(int X, int Y, Vector3D Color)

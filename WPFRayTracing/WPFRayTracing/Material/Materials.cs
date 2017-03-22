@@ -13,7 +13,14 @@ namespace WPFRayTracing
 
         public virtual Vector3D Shading(ShadeRec SR)
         {
-            return new Vector3D(0, 0, 0);
+            return PreDefColor.BlackColor;
         }
+
+        public virtual Vector3D AreaLightShade(ref ShadeRec SR)
+        {
+            return PreDefColor.BlackColor;
+        }
+        public virtual Vector3D Le(ref ShadeRec sr)
+        { return PreDefColor.BlackColor; }
     }
 }
