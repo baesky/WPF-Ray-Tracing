@@ -1,5 +1,5 @@
 # WPF-Ray-Tracing
-Ray Tracing Exercise. It's a code translation from cpp&wxwidget to c#/wpf.
+Ray Tracing Exercise(Using C#,WPF). Based On ref book's skeletal source code and enchance it in rendering.
 
 reference book:http://www.raytracegroundup.com/
 
