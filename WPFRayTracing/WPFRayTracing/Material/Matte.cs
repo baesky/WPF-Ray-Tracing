@@ -22,6 +22,9 @@ namespace WPFRayTracing
             Vector3D LtFac = SR.World.AmbientLight.L(ref SR);
             Vector3D L = new Vector3D(RHO.X * LtFac.X, RHO.Y * LtFac.Y, RHO.Z * LtFac.Z);
 
+            if ((L.X + L.Y + L.Z) <= 0.001f)
+                return L;
+
             Ray ShadowRay = new Ray();
 
             foreach (Light Lt in SR.World.Lights)

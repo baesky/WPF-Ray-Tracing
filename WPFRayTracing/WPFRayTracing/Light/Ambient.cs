@@ -4,6 +4,10 @@ namespace WPFRayTracing
 {
     class Ambient : Light
     {
+        public Ambient()
+        {
+            ShadowRay = new Ray();
+        }
         public Vector3D GetDirection(ref ShadeRec sr)
         {
             return SamplerRef.SampleHemisphere();
@@ -20,7 +24,8 @@ namespace WPFRayTracing
             Vector3D v = w.CrossProduct(new Vector3D(0.0072, 1.0, 0.0034)) ; // jitter the up vector in case normal is vertical
             v = v.Normalize().ToVector3D();
             Vector3D u = v.CrossProduct(w);
-            Ray ShadowRay = new Ray();
+            u = u.Normalize().ToVector3D();
+           
             ShadowRay.Origin = sr.HitPoint;
 
 
@@ -37,8 +42,9 @@ namespace WPFRayTracing
         public Vector3D Color { get; set; }
         public float MinAmount { get; set; }
         protected Sampler SamplerRef;
-        public bool bCastShadow { get { return false; } }
+        public bool bCastShadow { get { return true; } }
         public bool EnableCastShadow() { return bCastShadow; }
+        private Ray ShadowRay;
         public bool CheckInShadow(ref Ray ShadowRay, ref ShadeRec SR)
         {
             float t = 0.0f;

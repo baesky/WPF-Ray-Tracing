@@ -31,13 +31,13 @@ namespace WPFRayTracing
             Ambient AmbLt = new Ambient();
             AmbLt.ls = 0.15f;
             AmbLt.MinAmount = 0.0f;
-            AmbLt.Color = new Vector3D(1.00,1.0,1.0);
+            AmbLt.Color = new Vector3D(1,1,1);
             AmbLt.SetSampler(ref AmbientSampler);
             AmbientLight = AmbLt;
             
             Directional DirLt = new Directional();
-            DirLt.bCastShadow = false;
-            DirLt.Dir = new Vector3D(150, 100, 100);
+            DirLt.bCastShadow = true;
+            DirLt.Dir = new Vector3D(90, 100, 0.0);
             DirLt.ls = 3.0f;
             DirLt.Color = new Vector3D(1.0, 1.0, 1.0);
             Lights.Add(DirLt);
@@ -46,7 +46,7 @@ namespace WPFRayTracing
 
             Objects = new List<GeometryObject>();
 
-            GeometryObject TestSphere1 = new Sphere(new Vector3D(-60, -30, -30), 80.0);
+            GeometryObject TestSphere1 = new Sphere(new Vector3D(-60, -20, -30), 80.0);
             TestSphere1.Color = new Vector3D(1, 0, 0);
             Matte SphereMat = new Matte();
             SphereMat.AmbientBRDF.Kd = 0.8f;
@@ -58,23 +58,23 @@ namespace WPFRayTracing
             TestSphere1.Material = SphereMat;
             AddRenderObjects(ref TestSphere1);
 
-            //GeometryObject TestSphere2 = new Sphere(new Vector3D(75, 15, 0 ), 60.0);
-            //TestSphere2.Color = new Vector3D(1, 1, 0);
-            //Matte SphereMat2 = new Matte();
-            //SphereMat2.AmbientBRDF.Kd = 1.0f;
-            //SphereMat2.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
-            //SphereMat2.DiffuseBRDF.Kd = 0.75f;
-            //SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
-            //SphereMat2.SpecularBRDF.Ks = 0.25f;
-            //SphereMat2.SpecularBRDF.Exp = 2.0f;
-            //TestSphere2.Material = SphereMat2;
-            //AddRenderObjects(ref TestSphere2);
+            GeometryObject TestSphere2 = new Sphere(new Vector3D(75, 15, -130), 60.0);
+            TestSphere2.Color = new Vector3D(1, 1, 0);
+            Matte SphereMat2 = new Matte();
+            SphereMat2.AmbientBRDF.Kd = 1.0f;
+            SphereMat2.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
+            SphereMat2.DiffuseBRDF.Kd = 0.75f;
+            SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
+            SphereMat2.SpecularBRDF.Ks = 0.25f;
+            SphereMat2.SpecularBRDF.Exp = 2.0f;
+            TestSphere2.Material = SphereMat2;
+            AddRenderObjects(ref TestSphere2);
 
-            GeometryObject TestPlane1 = new Plane(new Vector3D(0, 0, -210), new Vector3D(0, 1, 0.5));
+            GeometryObject TestPlane1 = new Plane(new Vector3D(0, 0, -200), new Vector3D(0.0, 1, 0.5));
             TestPlane1.Color = new Vector3D(1, 1, 1);
             Matte PlaneMat1 = new Matte();
             PlaneMat1.AmbientBRDF.Kd = 1.0f;
-            PlaneMat1.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
+            PlaneMat1.AmbientBRDF.Cd = new Vector3D(1.00, 1.0, 1.00);
             PlaneMat1.DiffuseBRDF.Kd = 0.8f;
             PlaneMat1.DiffuseBRDF.Cd = TestPlane1.Color;
             PlaneMat1.SpecularBRDF.Ks = 0.25f;
