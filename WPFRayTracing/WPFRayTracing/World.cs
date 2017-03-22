@@ -27,6 +27,8 @@ namespace WPFRayTracing
             VP.Gamma = 1.0;
             BackgroundColor = new Vector3D(0, 0, 0);
 
+            RayTracer = new AreaLighting(this);//new MultiObjects(this);
+
             Sampler AmbientSampler = new MultiJittered(16);
             Ambient AmbLt = new Ambient();
             AmbLt.ls = 0.15f;
@@ -35,14 +37,14 @@ namespace WPFRayTracing
             AmbLt.SetSampler(ref AmbientSampler);
             AmbientLight = AmbLt;
             
-            Directional DirLt = new Directional();
-            DirLt.bCastShadow = true;
-            DirLt.Dir = new Vector3D(90, 100, 0.0);
-            DirLt.ls = 3.0f;
-            DirLt.Color = new Vector3D(1.0, 1.0, 1.0);
-            Lights.Add(DirLt);
+            //Directional DirLt = new Directional();
+            //DirLt.bCastShadow = true;
+            //DirLt.Dir = new Vector3D(90, 100, 0.0);
+            //DirLt.ls = 3.0f;
+            //DirLt.Color = new Vector3D(1.0, 1.0, 1.0);
+            //Lights.Add(DirLt);
 
-            RayTracer = new MultiObjects(this);
+            
 
             Objects = new List<GeometryObject>();
 
@@ -81,6 +83,20 @@ namespace WPFRayTracing
             PlaneMat1.SpecularBRDF.Exp = 2.0f;
             TestPlane1.Material = PlaneMat1;
             AddRenderObjects(ref TestPlane1);
+
+            //emissive light
+            Emissive ELight = new Emissive();
+            ELight.ls = 40;
+            ELight.ce = PreDefColor.WhiteColor;
+
+            GeometryObject RectLight = new RectLight(new Vector3D(100, 0, 250), new Vector3D(10,10,10), new Vector3D(15,15,15), new Vector3D(0, 1, 0));
+            RectLight.Material = ELight;
+            RectLight.SamplerRef = AmbientSampler;
+            AddRenderObjects(ref RectLight);
+            AreaLight AreaLt = new AreaLight();
+            AreaLt.GeoObj = RectLight;
+            Lights.Add(AreaLt);
+
         }
         public void RenderScene()
         {

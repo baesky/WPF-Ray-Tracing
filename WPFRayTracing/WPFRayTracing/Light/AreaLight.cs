@@ -21,7 +21,7 @@ namespace WPFRayTracing
 
         public bool EnableCastShadow()
         {
-            return false;
+            return true;
         }
 
         public Vector3D GetDirection(ref ShadeRec sr)
@@ -39,7 +39,7 @@ namespace WPFRayTracing
 
             if(NDotD > 0.0f)
             {
-                return Mat.Le(ref sr);
+                return GeoObj.Material.Le(ref sr);
             }
             else
             {
@@ -60,9 +60,8 @@ namespace WPFRayTracing
         }
 
         public GeometryObject GeoObj { get; set; }
-        public Materials Mat { get; set; }
         public Vector3D SamplePoint { get; set; }
-        public Vector3D SampleNormal { get; set; }
+        private Vector3D SampleNormal { get; set; }
         public Vector3D Wi { get; set; }
     }
 }

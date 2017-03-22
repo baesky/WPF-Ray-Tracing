@@ -25,8 +25,6 @@ namespace WPFRayTracing
             if ((L.X + L.Y + L.Z) <= 0.001f)
                 return L;
 
-            Ray ShadowRay = new Ray();
-
             foreach (Light Lt in SR.World.Lights)
             {
                 Vector3D Wi = Lt.GetDirection(ref SR).Normalize().ToVector3D();
@@ -62,8 +60,6 @@ namespace WPFRayTracing
 
             if ((L.X + L.Y + L.Z) <= 0.001f)
                 return L;
-
-            Ray ShadowRay = new Ray();
 
             foreach (Light Lt in SR.World.Lights)
             {

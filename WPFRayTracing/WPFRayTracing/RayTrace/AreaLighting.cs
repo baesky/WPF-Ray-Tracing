@@ -13,7 +13,11 @@ namespace WPFRayTracing
         {
 
         }
+        public override Vector3D TraceRay(ref Ray TestRay)
+        {
+            return TraceRay(ref TestRay, 2);
 
+        }
         public override Vector3D TraceRay(ref Ray TestRay, int depth)
         {
             if (depth > WorldInstance.VP.MaxDepth)

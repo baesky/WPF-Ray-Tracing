@@ -5,9 +5,9 @@ namespace WPFRayTracing
     public class Materials
     {
         public Materials()
-        { }
+        { ShadowRay = new Ray(); }
 
-        public Materials(Materials Mat)
+        public Materials(Materials Mat):this()
         {
         }
 
@@ -22,5 +22,7 @@ namespace WPFRayTracing
         }
         public virtual Vector3D Le(ref ShadeRec sr)
         { return PreDefColor.BlackColor; }
+
+        public Ray ShadowRay;
     }
 }

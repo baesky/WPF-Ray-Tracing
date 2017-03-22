@@ -73,6 +73,7 @@
     <Compile Include="Camera\Camera.cs" />
     <Compile Include="Geometry\GeometryObject.cs" />
     <Compile Include="Geometry\Plane.cs" />
+    <Compile Include="Geometry\RectLight.cs" />
     <Compile Include="Geometry\ShadeRec.cs" />
     <Compile Include="Geometry\Sphere.cs" />
     <Compile Include="Light\Ambient.cs" />

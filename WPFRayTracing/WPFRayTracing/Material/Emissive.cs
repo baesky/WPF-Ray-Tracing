@@ -7,7 +7,7 @@ namespace WPFRayTracing
         public float ls { get; set; }
         public Vector3D ce { get; set; }
 
-        public virtual Vector3D Shade(ref ShadeRec SR)
+        public override Vector3D Shading(ShadeRec SR)
         {
             return AreaLightShade(ref SR);
         }
@@ -22,9 +22,10 @@ namespace WPFRayTracing
                 return PreDefColor.BlackColor;
         }
 
-        public Vector3D Le()
+        public override Vector3D Le(ref ShadeRec sr)
         {
             return ce.ScaleBy(ls);
         }
+ 
     }
 }
