@@ -16,6 +16,8 @@ namespace WPFRayTracing
         public double Inv_Gamma { get { return 1.0 / Gamma; } }
         public bool ShowOutOfGamut { get; set; }
 
+        public Sampler SamplerRef { get; set; }
+
         public static WriteableBitmap BackBuffer;
 
         public ViewPlane(int hres, int vres)
@@ -24,7 +26,9 @@ namespace WPFRayTracing
             VRes = vres;
             NumOfSample = 1;
             BackBuffer = new WriteableBitmap(HRes, VRes, 96, 96, PixelFormats.Bgra32, null);
- 
+            SamplerRef = new MultiJittered(16);
+            NumOfSample = SamplerRef.NumSamples; 
+            SamplerRef.Generate_Samples();
         }
 
         public static void SetPixel(int X, int Y, Vector3D Color)

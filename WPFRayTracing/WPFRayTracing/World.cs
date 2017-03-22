@@ -92,10 +92,18 @@ namespace WPFRayTracing
             {
                 for(int HPixel = 0; HPixel < VP.HRes; ++HPixel)
                 {
-                    TestRay.Origin = new Vector3D(VP.PixelSize * (HPixel - VP.HRes / 2.0 + 0.5)
-                                              , VP.PixelSize * (VP.VRes / 2.0 - VPixel  + 0.5)
-                                              , 100.0);
-                    RGBColor = RayTracer.TraceRay(ref TestRay);
+                    RGBColor = new Vector3D();
+
+                    for(int SampleIdx = 0; SampleIdx < VP.NumOfSample; ++SampleIdx)
+                    {
+                        Vector2D SamplePoint = VP.SamplerRef.SampleUnitSquare();
+                        TestRay.Origin = new Vector3D(VP.PixelSize * (HPixel - VP.HRes / 2.0 + SamplePoint.X)
+                                             , VP.PixelSize * (VP.VRes / 2.0 - VPixel + SamplePoint.Y)
+                                             , 100.0);
+                        RGBColor += RayTracer.TraceRay(ref TestRay);
+                    }
+
+                    RGBColor /= VP.NumOfSample;
                     DisplayPixel(HPixel, VPixel, ref RGBColor);
                 }
             }

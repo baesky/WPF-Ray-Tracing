@@ -9,6 +9,7 @@ namespace WPFRayTracing
     {
         public Sampler(int SamplesNum)
         {
+            Rand = new Random();
             RandomJump = 0;
             Count = 0;
             NumSets = 83;
@@ -16,6 +17,7 @@ namespace WPFRayTracing
             NumSamples = SamplesNum;
             Generate_Samples();
             SetupShuffledIndex();
+            
         }
 
         public virtual void Generate_Samples() { }
@@ -24,7 +26,6 @@ namespace WPFRayTracing
         {
             ShuffledIndices = new List<int>(NumSets * NumSamples);
             List<int> Indices = new List<int>(NumSamples);
-            Random Rand = new Random();
             for (int i = 0; i < NumSets; ++i)
             {
                 
@@ -50,8 +51,7 @@ namespace WPFRayTracing
         {
             if(Count % NumSamples == 0)
             {
-                Random rand = new Random();
-                RandomJump = (rand.Next() % NumSets) * NumSamples;
+                RandomJump = (Rand.Next() % NumSets) * NumSamples;
             }
 
             return Samples[RandomJump + ShuffledIndices[RandomJump + Count++ % NumSamples]];
@@ -78,14 +78,12 @@ namespace WPFRayTracing
 
         public Vector3D SampleHemisphere()
         {
-            Random rand = new Random();
-
             if (Count % NumSamples == 0)                                   // start of a new pixel
-                RandomJump = (rand.Next() % NumSets) * NumSamples;
+                RandomJump = (Rand.Next() % NumSets) * NumSamples;
 
             return (HemisphereSamples[RandomJump + ShuffledIndices[RandomJump + Count++ % NumSamples]]);
         }
-
+        private Random Rand;
         /* the number of sample points in a set*/
         public int NumSamples;
         /* the number of sample sets*/

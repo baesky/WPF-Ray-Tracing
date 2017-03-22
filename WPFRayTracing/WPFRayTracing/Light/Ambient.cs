@@ -23,21 +23,14 @@ namespace WPFRayTracing
             Ray ShadowRay = new Ray();
             ShadowRay.Origin = sr.HitPoint;
 
-            Vector3D DiffL = new Vector3D();
 
-            for(int i = 0; i< SamplerRef.NumSamples; ++i)
-            {
-                Vector3D HemiVec = GetDirection(ref sr).Normalize().ToVector3D();
-                ShadowRay.Direction = u.ScaleBy(HemiVec.X) + v.ScaleBy(HemiVec.Y) + w.ScaleBy(HemiVec.Z);
-                if (CheckInShadow(ref ShadowRay, ref sr))
-                    DiffL += (MinAmount * ls * Color);
-                else
-                    DiffL += (ls * Color);
-            }
+            Vector3D HemiVec = GetDirection(ref sr).Normalize().ToVector3D();
+            ShadowRay.Direction = u.ScaleBy(HemiVec.X) + v.ScaleBy(HemiVec.Y) + w.ScaleBy(HemiVec.Z);
+            if (CheckInShadow(ref ShadowRay, ref sr))
+                return (MinAmount * ls * Color);
+            else
+                return (ls * Color);
 
-            DiffL /= SamplerRef.NumSamples;
-
-            return DiffL;
         }
 
         public float ls { get; set; }
