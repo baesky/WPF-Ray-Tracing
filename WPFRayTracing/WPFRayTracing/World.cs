@@ -71,7 +71,7 @@ namespace WPFRayTracing
             //.SpecularBRDF.Exp = 1000;
             RMat.GlossySpecularBRDF.Ks = 0.9f;
             RMat.GlossySpecularBRDF.Cs = PreDefColor.WhiteColor;
-            RMat.GlossySpecularBRDF.Exp = 1000;
+            RMat.GlossySpecularBRDF.Exp = 1;
             Sampler GlossySampler = new MultiJittered(TestData.TestSampleCount);
             RMat.GlossySpecularBRDF.SetSampler(ref GlossySampler);
             GlossySampler.MapSamplesToHemisphere(RMat.GlossySpecularBRDF.Exp);
@@ -93,7 +93,7 @@ namespace WPFRayTracing
             GeometryObject TestPlane1 = new Plane(new Vector3D(0, 0, -200), new Vector3D(0.0, 1, 0.5));
             TestPlane1.Color = new Vector3D(1, 1, 1);
             Matte PlaneMat1 = new Matte();
-            PlaneMat1.AmbientBRDF.Kd = 1.0f;
+            PlaneMat1.AmbientBRDF.Kd = 5.0f;
             PlaneMat1.AmbientBRDF.Cd = PreDefColor.WhiteColor;
             PlaneMat1.DiffuseBRDF.Kd = 0.8f;
             PlaneMat1.DiffuseBRDF.Cd = TestPlane1.Color;

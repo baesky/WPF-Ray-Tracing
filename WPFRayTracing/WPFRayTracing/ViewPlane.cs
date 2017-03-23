@@ -28,7 +28,7 @@ namespace WPFRayTracing
             SamplerRef = new MultiJittered(TestData.TestVPSampleCount);
             NumOfSample = SamplerRef.NumSamples; 
             SamplerRef.Generate_Samples();
-            MaxDepth = 2;
+            MaxDepth = 3;
         }
 
         public static void SetPixel(int X, int Y,ref Vector3D Color)
