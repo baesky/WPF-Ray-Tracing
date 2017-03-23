@@ -98,6 +98,7 @@
     <Compile Include="Light\EnviromentLight.cs" />
     <Compile Include="Light\Light.cs" />
     <Compile Include="Material\Emissive.cs" />
+    <Compile Include="Material\GlossyReflective.cs" />
     <Compile Include="Material\Materials.cs" />
     <Compile Include="Material\Matte.cs" />
     <Compile Include="Material\Reflective.cs" />

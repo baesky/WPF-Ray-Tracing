@@ -19,10 +19,10 @@ namespace WPFRayTracing
         {
             HitAnObject = false;
             Material = null;
-            HitPoint = new Vector3D();
-            LocalHitPoint = new Vector3D();
-            Normal = new Vector3D();
-            Ray = new Ray();
+            HitPoint = PreDefColor.BlackColor;
+            LocalHitPoint = PreDefColor.BlackColor;
+            Normal = PreDefColor.WhiteColor;
+          //  Ray = new Ray();
             Depth = 0;
             RayParam = 0.0;
             this.World = world;

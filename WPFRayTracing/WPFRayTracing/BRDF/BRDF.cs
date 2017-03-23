@@ -36,8 +36,9 @@ namespace WPFRayTracing
             return PreDefColor.BlackColor;
         }
 
-        public virtual Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo,ref Vector3D wi,out double pdf)
+        public virtual Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo,out Vector3D wi,out double pdf)
         {
+            wi = PreDefColor.BlackColor;
             pdf = 1.0;
             return PreDefColor.BlackColor;
         }

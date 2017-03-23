@@ -29,7 +29,7 @@ namespace WPFRayTracing
             return new Vector3D(0,0,0);
         }
 
-        public override Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo, ref Vector3D wi,out double pdf)
+        public override Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo, out Vector3D wi,out double pdf)
         {
             double NDotWo = sr.Normal.DotProduct(wo);
             Vector3D r = -wo + 2.0 * sr.Normal.ScaleBy(NDotWo);   

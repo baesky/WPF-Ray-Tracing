@@ -28,5 +28,7 @@ namespace WPFRayTracing
 
             return L;
         }
+
+       
     }
 }

@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 namespace WPFRayTracing
 {
+    public class TestData
+    {
+        public static readonly int TestVPSampleCount = 64;
+        public static readonly int TestSampleCount = 64;
+    }
     public class World
     {
         public ViewPlane            VP;
@@ -15,6 +20,8 @@ namespace WPFRayTracing
         public List<Light>          Lights;
         public Sphere TestSphere;
 
+        ShadeRec SR = null;
+        
         public World()
         {
             VP = new ViewPlane(768, 768);
@@ -29,7 +36,7 @@ namespace WPFRayTracing
 
             RayTracer = new WhittedTracer(this);//new AreaLighting(this);//new MultiObjects(this);
 
-            Sampler AmbientSampler = new MultiJittered(16);
+            Sampler AmbientSampler = new MultiJittered(TestData.TestSampleCount);
             Ambient AmbLt = new Ambient();
             AmbLt.ls = 0.15f;
             AmbLt.MinAmount = 0.0f;
@@ -44,8 +51,6 @@ namespace WPFRayTracing
             DirLt.Color = new Vector3D(1.0, 1.0, 1.0);
             Lights.Add(DirLt);
 
-
-
             Objects = new List<GeometryObject>();
 
             GeometryObject TestSphere1 = new Sphere(new Vector3D(-60, 100, -230), 90.0);
@@ -58,14 +63,18 @@ namespace WPFRayTracing
             //SphereMat.SpecularBRDF.Ks = 0.1f;
             //SphereMat.SpecularBRDF.Exp = 0.9f;
             //TestSphere1.Material = SphereMat;
-            Reflective RMat = new Reflective();
-            RMat.AmbientBRDF.Kd = 0.25f;
-            RMat.DiffuseBRDF.Kd = 0.5f;
-            RMat.DiffuseBRDF.Cd = new Vector3D(0.75, 0.75, 0);
-            RMat.SpecularBRDF.Ks = 0.35f;
-            RMat.SpecularBRDF.Exp = 100;
-            RMat.PefSpecularBRDF.Kr = 0.35f;
-            RMat.PefSpecularBRDF.Cr = PreDefColor.WhiteColor;
+            GlossyReflective RMat = new GlossyReflective();
+            RMat.AmbientBRDF.Kd = 0.0f;
+            RMat.DiffuseBRDF.Kd = 0.0f;
+            RMat.DiffuseBRDF.Cd = PreDefColor.WhiteColor;
+            //RMat.SpecularBRDF.Ks = 0.0f;
+            //.SpecularBRDF.Exp = 1000;
+            RMat.GlossySpecularBRDF.Ks = 0.9f;
+            RMat.GlossySpecularBRDF.Cs = PreDefColor.WhiteColor;
+            RMat.GlossySpecularBRDF.Exp = 1000;
+            Sampler GlossySampler = new MultiJittered(TestData.TestSampleCount);
+            RMat.GlossySpecularBRDF.SetSampler(ref GlossySampler);
+            GlossySampler.MapSamplesToHemisphere(RMat.GlossySpecularBRDF.Exp);
             TestSphere1.Material = RMat;
             AddRenderObjects(ref TestSphere1);
 
@@ -73,7 +82,7 @@ namespace WPFRayTracing
             TestSphere2.Color = new Vector3D(1, 1, 0);
             Matte SphereMat2 = new Matte();
             SphereMat2.AmbientBRDF.Kd = 1.0f;
-            SphereMat2.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
+            SphereMat2.AmbientBRDF.Cd = PreDefColor.WhiteColor;
             SphereMat2.DiffuseBRDF.Kd = 0.75f;
             SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
             SphereMat2.SpecularBRDF.Ks = 0.25f;
@@ -85,7 +94,7 @@ namespace WPFRayTracing
             TestPlane1.Color = new Vector3D(1, 1, 1);
             Matte PlaneMat1 = new Matte();
             PlaneMat1.AmbientBRDF.Kd = 1.0f;
-            PlaneMat1.AmbientBRDF.Cd = new Vector3D(1.00, 1.0, 1.00);
+            PlaneMat1.AmbientBRDF.Cd = PreDefColor.WhiteColor;
             PlaneMat1.DiffuseBRDF.Kd = 0.8f;
             PlaneMat1.DiffuseBRDF.Cd = TestPlane1.Color;
             PlaneMat1.SpecularBRDF.Ks = 0.25f;
@@ -168,7 +177,8 @@ namespace WPFRayTracing
 
         public ShadeRec HitBareBoneObjects(ref Ray TestRay)
         {
-            ShadeRec SR = new ShadeRec(this);
+            if(SR == null)
+                SR = new ShadeRec(this);
             double t = 0.0;
             double tmin = double.MaxValue;
             Vector3D Normal = new Vector3D(1.0,1.0,1.0);

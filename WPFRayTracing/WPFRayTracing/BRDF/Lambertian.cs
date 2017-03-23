@@ -22,7 +22,7 @@ namespace WPFRayTracing
             return Cd.ScaleBy(Kd * (1.0 / Math.PI));
         }
 
-        public override Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo, ref Vector3D wi, out double pdf)
+        public override Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo, out Vector3D wi, out double pdf)
         {
             Vector3D w = sr.Normal;
             Vector3D v = new Vector3D(0.0034, 1, 0.0071);

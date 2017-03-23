@@ -23,7 +23,7 @@ namespace WPFRayTracing
                 {
                     SR.Depth = depth;
                     SR.Ray = TestRay;
-                    return SR.Material.Shading(SR);
+                    return SR.Material.AreaLightShade(ref SR);
                 }
                 else
                 {
