@@ -24,15 +24,18 @@ namespace WPFRayTracing
         {
             HRes = hres;
             VRes = vres;
-            NumOfSample = 1;
             BackBuffer = new WriteableBitmap(HRes, VRes, 96, 96, PixelFormats.Bgra32, null);
+#if DEBUG
             SamplerRef = new MultiJittered(16);
+#else
+            SamplerRef = new MultiJittered(16);
+#endif
             NumOfSample = SamplerRef.NumSamples; 
             SamplerRef.Generate_Samples();
             MaxDepth = 2;
         }
 
-        public static void SetPixel(int X, int Y, Vector3D Color)
+        public static void SetPixel(int X, int Y,ref Vector3D Color)
         {
 
             BackBuffer.Lock();

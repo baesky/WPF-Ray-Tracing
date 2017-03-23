@@ -60,17 +60,17 @@ namespace WPFRayTracing
             TestSphere1.Material = SphereMat;
             AddRenderObjects(ref TestSphere1);
 
-            GeometryObject TestSphere2 = new Sphere(new Vector3D(75, 15, -130), 60.0);
-            TestSphere2.Color = new Vector3D(1, 1, 0);
-            Matte SphereMat2 = new Matte();
-            SphereMat2.AmbientBRDF.Kd = 1.0f;
-            SphereMat2.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
-            SphereMat2.DiffuseBRDF.Kd = 0.75f;
-            SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
-            SphereMat2.SpecularBRDF.Ks = 0.25f;
-            SphereMat2.SpecularBRDF.Exp = 2.0f;
-            TestSphere2.Material = SphereMat2;
-            AddRenderObjects(ref TestSphere2);
+            //GeometryObject TestSphere2 = new Sphere(new Vector3D(75, 15, -130), 60.0);
+            //TestSphere2.Color = new Vector3D(1, 1, 0);
+            //Matte SphereMat2 = new Matte();
+            //SphereMat2.AmbientBRDF.Kd = 1.0f;
+            //SphereMat2.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
+            //SphereMat2.DiffuseBRDF.Kd = 0.75f;
+            //SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
+            //SphereMat2.SpecularBRDF.Ks = 0.25f;
+            //SphereMat2.SpecularBRDF.Exp = 2.0f;
+            //TestSphere2.Material = SphereMat2;
+            //AddRenderObjects(ref TestSphere2);
 
             GeometryObject TestPlane1 = new Plane(new Vector3D(0, 0, -200), new Vector3D(0.0, 1, 0.5));
             TestPlane1.Color = new Vector3D(1, 1, 1);
@@ -85,18 +85,30 @@ namespace WPFRayTracing
             AddRenderObjects(ref TestPlane1);
 
             //emissive light
-            Emissive ELight = new Emissive();
-            ELight.ls = 40;
-            ELight.ce = PreDefColor.WhiteColor;
+            //Emissive ELight = new Emissive();
+            //ELight.ls = 40;
+            //ELight.ce = PreDefColor.WhiteColor;
 
-            GeometryObject RectLight = new RectLight(new Vector3D(100, 0, 250), new Vector3D(10,10,10), new Vector3D(15,15,15), new Vector3D(0, 1, 0));
-            RectLight.Material = ELight;
-            RectLight.SamplerRef = AmbientSampler;
-            AddRenderObjects(ref RectLight);
-            AreaLight AreaLt = new AreaLight();
-            AreaLt.GeoObj = RectLight;
-            Lights.Add(AreaLt);
+            //GeometryObject RectLight = new RectLight(new Vector3D(100, 0, 250), new Vector3D(10,10,10), new Vector3D(15,15,15), new Vector3D(0, 1, 0));
+            //RectLight.Material = ELight;
+            //RectLight.SamplerRef = AmbientSampler;
+            //AddRenderObjects(ref RectLight);
+            //AreaLight AreaLt = new AreaLight();
+            //AreaLt.GeoObj = RectLight;
+            //Lights.Add(AreaLt);
 
+            Emissive EnvLight = new Emissive();
+            EnvLight.ls = 1.5f;
+            EnvLight.ce = new Vector3D(1.0, 1.0,0.5);
+            GeometryObject SphereEnv = new Sphere(PreDefColor.BlackColor, 10000);
+            SphereEnv.Material = EnvLight;
+            ((Sphere)SphereEnv).bInside = true;
+            AddRenderObjects(ref SphereEnv);
+
+            EnviromentLight EvnLt = new EnviromentLight();
+            EvnLt.Mat = EnvLight;
+            EvnLt.SamplerRef = AmbientSampler;
+            Lights.Add(EvnLt);
         }
         public void RenderScene()
         {
@@ -130,14 +142,14 @@ namespace WPFRayTracing
         public void DisplayPixel(int X, int Y, ref Vector3D Colors)
         {
             Vector<double> Coords = Colors.ToVector();
-            if (Coords[0] > 1.0f)
+            if (Coords[0] > 1.0)
                 Coords[0] /= Coords[0];
-            if (Coords[1] > 1.0f)
+            if (Coords[1] > 1.0)
                 Coords[1] /= Coords[1];
-            if (Coords[2] > 1.0f)
+            if (Coords[2] > 1.0)
                 Coords[2] /= Coords[2];
-
-            ViewPlane.SetPixel(X, Y, Vector3D.OfVector(Coords));
+            Vector3D ClampedColor = Vector3D.OfVector(Coords);
+            ViewPlane.SetPixel(X, Y, ref ClampedColor);
         }
 
         public void AddRenderObjects(ref GeometryObject GeoObj)

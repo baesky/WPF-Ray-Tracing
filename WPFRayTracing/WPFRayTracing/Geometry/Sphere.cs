@@ -38,6 +38,9 @@ namespace WPFRayTracing
 
                 double t = (-b - e) / denom;
 
+                if (t > 1000)
+                    return false;
+
                 if(t > Epsilon)
                 {
                     Param = t;
@@ -77,6 +80,9 @@ namespace WPFRayTracing
 
                 double t = (-b - e) / denom;
 
+                if (bInside && t < -10000)
+                    return false;
+
                 if (t > Epsilon)
                 {
                     HitPos = (float)t;
@@ -84,6 +90,9 @@ namespace WPFRayTracing
                 }
 
                 t = (-b + e) / denom;
+
+                if (bInside && t > 10000)
+                    return false;
 
                 if (t > Epsilon)
                 {
@@ -94,5 +103,6 @@ namespace WPFRayTracing
                 return false;
             }
         }
+        public bool bInside = false;
     }
 }

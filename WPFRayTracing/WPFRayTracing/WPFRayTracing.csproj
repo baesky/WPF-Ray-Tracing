@@ -28,7 +28,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -79,6 +79,7 @@
     <Compile Include="Light\Ambient.cs" />
     <Compile Include="Light\AreaLight.cs" />
     <Compile Include="Light\Directional.cs" />
+    <Compile Include="Light\EnviromentLight.cs" />
     <Compile Include="Light\Light.cs" />
     <Compile Include="Material\Emissive.cs" />
     <Compile Include="Material\Materials.cs" />
