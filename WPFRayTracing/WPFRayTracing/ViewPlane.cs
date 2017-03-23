@@ -25,11 +25,7 @@ namespace WPFRayTracing
             HRes = hres;
             VRes = vres;
             BackBuffer = new WriteableBitmap(HRes, VRes, 96, 96, PixelFormats.Bgra32, null);
-#if DEBUG
             SamplerRef = new MultiJittered(16);
-#else
-            SamplerRef = new MultiJittered(16);
-#endif
             NumOfSample = SamplerRef.NumSamples; 
             SamplerRef.Generate_Samples();
             MaxDepth = 2;

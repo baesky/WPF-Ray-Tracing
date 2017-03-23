@@ -27,22 +27,24 @@ namespace WPFRayTracing
         
         public virtual Vector3D Factor(ref ShadeRec sr, ref Vector3D wo, ref Vector3D wi)
         {
-            return new Vector3D(0, 0, 0);
+            return PreDefColor.BlackColor;
         }
 
-        public virtual Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo, ref Vector3D wi)
+        public virtual Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo, out Vector3D wi)
         {
-            return new Vector3D(0, 0, 0);
+            wi = PreDefColor.BlackColor;
+            return PreDefColor.BlackColor;
         }
 
-        public virtual Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo,ref Vector3D wi, double pdf)
+        public virtual Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo,ref Vector3D wi,out double pdf)
         {
-            return new Vector3D(0, 0, 0);
+            pdf = 1.0;
+            return PreDefColor.BlackColor;
         }
 
         public virtual Vector3D RHO(ref ShadeRec sr, ref Vector3D wo)
         {
-            return new Vector3D(0, 0, 0);
+            return PreDefColor.BlackColor;
         }
 
         protected Sampler SamplerRef;

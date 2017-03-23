@@ -7,7 +7,7 @@ namespace WPFRayTracing
         public Vector3D Origin { get; set; }
 
         public Vector3D Direction { get; set; }
-             
+        public int Depth = 0;
         public Ray()
         {
             Origin = new Vector3D(0,0,0);
