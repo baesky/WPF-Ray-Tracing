@@ -35,8 +35,9 @@ namespace WPFRayTracing
             Vector3D wi;
             double pdf;
             Vector3D fr = PefSpecularBRDF.SampleF(ref SR, ref wo, out wi,out pdf);
-            Ray reflected_ray = new Ray(ref SR.HitPoint,ref wi);
-            Vector3D Rslt = SR.World.RayTracer.TraceRay(ref reflected_ray, SR.Depth + 1);
+            ReflectRay.Origin = SR.HitPoint;
+            ReflectRay.Direction = wi;
+            Vector3D Rslt = SR.World.RayTracer.TraceRay(ref ReflectRay, SR.Depth + 1);
             double p = (SR.Normal.DotProduct(wi) / pdf);
             return new Vector3D(fr.X * Rslt.X * p, fr.Y * Rslt.Y * p, fr.Z * Rslt.Z * p);
         }

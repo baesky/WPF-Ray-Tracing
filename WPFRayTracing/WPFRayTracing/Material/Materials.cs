@@ -5,7 +5,10 @@ namespace WPFRayTracing
     public class Materials
     {
         public Materials()
-        { ShadowRay = new Ray(); }
+        {
+            ShadowRay = new Ray();
+            ReflectRay = new Ray();
+        }
 
         public Materials(Materials Mat):this()
         {
@@ -29,5 +32,6 @@ namespace WPFRayTracing
         { return PreDefColor.BlackColor; }
 
         public Ray ShadowRay;
+        protected Ray ReflectRay;
     }
 }

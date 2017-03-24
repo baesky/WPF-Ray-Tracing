@@ -8,7 +8,7 @@ namespace WPFRayTracing
     {
         public static readonly int TestVPSampleCount = 64;
         public static readonly int TestSampleCount = 64;
-        public static readonly int TestMaxBounce = 1;
+        public static readonly int TestMaxBounce = 5;
         public static readonly Vector3D MainRayDir = new Vector3D(0, 0, -1);
     }
     public class World
@@ -64,8 +64,8 @@ namespace WPFRayTracing
             SphereMat.DiffuseBRDF.Kd = 0.75f;
             SphereMat.DiffuseBRDF.Cd = TestSphere1.Color;
             SphereMat.DiffuseBRDF.SetSampler(ref AmbientSampler);
-            SphereMat.SpecularBRDF.Ks = 0.1f;
-            SphereMat.SpecularBRDF.Exp = 0.9f;
+            SphereMat.SpecularBRDF.Kr = 0.6f;
+            SphereMat.SpecularBRDF.Cr = TestSphere1.Color;
             TestSphere1.Material = SphereMat;
 
             //glossy

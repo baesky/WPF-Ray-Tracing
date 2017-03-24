@@ -3,7 +3,7 @@ using MathNet.Spatial.Euclidean;
 
 namespace WPFRayTracing
 {
-    class PerfactSpecular : BRDF
+    public class PerfactSpecular : BRDF
     {
         public override Vector3D SampleF(ref ShadeRec sr, ref Vector3D wo, out Vector3D wi,out double pdf)
         {
