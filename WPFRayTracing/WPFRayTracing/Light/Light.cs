@@ -7,6 +7,8 @@ namespace WPFRayTracing
     {
         public static readonly Vector3D BlackColor = new Vector3D(0, 0, 0);
         public static readonly Vector3D WhiteColor = new Vector3D(1, 1, 1);
+        public static readonly Vector3D RedColor = new Vector3D(1, 0, 0);
+        public static readonly Vector3D YellowColor = new Vector3D(1, 1, 0);
     }
    
 

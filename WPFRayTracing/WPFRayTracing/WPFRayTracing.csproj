@@ -104,6 +104,7 @@
     <Compile Include="Material\Reflective.cs" />
     <Compile Include="RayTrace\AreaLighting.cs" />
     <Compile Include="RayTrace\MultiObjects.cs" />
+    <Compile Include="RayTrace\PathTracer.cs" />
     <Compile Include="RayTrace\Ray.cs" />
     <Compile Include="RayTrace\SingleSphere.cs" />
     <Compile Include="RayTrace\Tracer.cs" />

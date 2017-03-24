@@ -15,7 +15,7 @@ namespace WPFRayTracing
         public Lambertian DiffuseBRDF { get; set; }
         public GlossySpecular SpecularBRDF { get; set; }
 
-        public override Vector3D Shading(ShadeRec SR)
+        public override Vector3D Shading(ref ShadeRec SR)
         {
             Vector3D Wo = -SR.Ray.Direction;
             Vector3D RHO = AmbientBRDF.RHO(ref SR, ref Wo);
@@ -50,7 +50,17 @@ namespace WPFRayTracing
 
             return L;
         }
-
+        public override Vector3D PathShading(ref ShadeRec SR)
+        {
+            Vector3D wo = -SR.Ray.Direction;
+            Vector3D wi;
+            double pdf;
+            Vector3D f = DiffuseBRDF.SampleF(ref SR, ref wo,out wi,out pdf);
+            float NDotWi = (float)(SR.Normal.DotProduct(wi) / pdf);
+            Ray reflected_ray = new Ray(ref SR.HitPoint, ref wi);
+            Vector3D Rslt = SR.World.RayTracer.TraceRay(ref reflected_ray, SR.Depth + 1);
+            return new Vector3D(f.X * Rslt.X * NDotWi, f.Y * Rslt.Y * NDotWi, f.Z * Rslt.Z * NDotWi);
+        }
         public override Vector3D AreaLightShade(ref ShadeRec SR)
         {
             Vector3D Wo = -SR.Ray.Direction;

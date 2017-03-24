@@ -11,7 +11,7 @@ namespace WPFRayTracing
 
         public override Vector3D AreaLightShade(ref ShadeRec SR)
         {
-            Vector3D L = base.Shading(SR);
+            Vector3D L = base.Shading(ref SR);
             Vector3D Wo = -SR.Ray.Direction;
             Vector3D Wi;
             double pdf;

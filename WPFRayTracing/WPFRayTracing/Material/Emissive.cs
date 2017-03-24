@@ -7,7 +7,7 @@ namespace WPFRayTracing
         public float ls { get; set; }
         public Vector3D ce { get; set; }
 
-        public override Vector3D Shading(ShadeRec SR)
+        public override Vector3D Shading(ref ShadeRec SR)
         {
             return AreaLightShade(ref SR);
         }

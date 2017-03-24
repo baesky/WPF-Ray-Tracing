@@ -8,6 +8,8 @@ namespace WPFRayTracing
     {
         public static readonly int TestVPSampleCount = 64;
         public static readonly int TestSampleCount = 64;
+        public static readonly int TestMaxBounce = 1;
+        public static readonly Vector3D MainRayDir = new Vector3D(0, 0, -1);
     }
     public class World
     {
@@ -32,15 +34,15 @@ namespace WPFRayTracing
 
             VP.PixelSize = 1.0;
             VP.Gamma = 1.0;
-            BackgroundColor = new Vector3D(0, 0, 0);
+            BackgroundColor = PreDefColor.BlackColor;
 
-            RayTracer = new WhittedTracer(this);//new AreaLighting(this);//new MultiObjects(this);
+            RayTracer = new PathTracer(this);//new WhittedTracer(this);//new AreaLighting(this);//new MultiObjects(this);
 
             Sampler AmbientSampler = new MultiJittered(TestData.TestSampleCount);
             Ambient AmbLt = new Ambient();
             AmbLt.ls = 0.15f;
             AmbLt.MinAmount = 0.0f;
-            AmbLt.Color = new Vector3D(1,1,1);
+            AmbLt.Color = PreDefColor.WhiteColor;
             AmbLt.SetSampler(ref AmbientSampler);
             AmbientLight = AmbLt;
 
@@ -48,50 +50,54 @@ namespace WPFRayTracing
             DirLt.bCastShadow = true;
             DirLt.Dir = new Vector3D(90, 100, 0.0);
             DirLt.ls = 3.0f;
-            DirLt.Color = new Vector3D(1.0, 1.0, 1.0);
+            DirLt.Color = PreDefColor.WhiteColor;
             Lights.Add(DirLt);
 
             Objects = new List<GeometryObject>();
 
             GeometryObject TestSphere1 = new Sphere(new Vector3D(-60, 100, -230), 90.0);
-            TestSphere1.Color = new Vector3D(1, 0, 0);
-            //Matte SphereMat = new Matte();
-            //SphereMat.AmbientBRDF.Kd = 0.8f;
-            //SphereMat.AmbientBRDF.Cd = new Vector3D(1.00, 1.00, 1.00);
-            //SphereMat.DiffuseBRDF.Kd = 0.75f;
-            //SphereMat.DiffuseBRDF.Cd = TestSphere1.Color;
-            //SphereMat.SpecularBRDF.Ks = 0.1f;
-            //SphereMat.SpecularBRDF.Exp = 0.9f;
-            //TestSphere1.Material = SphereMat;
-            GlossyReflective RMat = new GlossyReflective();
-            RMat.AmbientBRDF.Kd = 0.0f;
-            RMat.DiffuseBRDF.Kd = 0.0f;
-            RMat.DiffuseBRDF.Cd = PreDefColor.WhiteColor;
-            //RMat.SpecularBRDF.Ks = 0.0f;
-            //.SpecularBRDF.Exp = 1000;
-            RMat.GlossySpecularBRDF.Ks = 0.9f;
-            RMat.GlossySpecularBRDF.Cs = PreDefColor.WhiteColor;
-            RMat.GlossySpecularBRDF.Exp = 1;
-            Sampler GlossySampler = new MultiJittered(TestData.TestSampleCount);
-            RMat.GlossySpecularBRDF.SetSampler(ref GlossySampler);
-            GlossySampler.MapSamplesToHemisphere(RMat.GlossySpecularBRDF.Exp);
-            TestSphere1.Material = RMat;
+            TestSphere1.Color = PreDefColor.RedColor;
+            Reflective SphereMat = new Reflective();
+
+            SphereMat.AmbientBRDF.Kd = 0.0f;
+            SphereMat.AmbientBRDF.Cd = PreDefColor.WhiteColor;
+            SphereMat.DiffuseBRDF.Kd = 0.75f;
+            SphereMat.DiffuseBRDF.Cd = TestSphere1.Color;
+            SphereMat.DiffuseBRDF.SetSampler(ref AmbientSampler);
+            SphereMat.SpecularBRDF.Ks = 0.1f;
+            SphereMat.SpecularBRDF.Exp = 0.9f;
+            TestSphere1.Material = SphereMat;
+
+            //glossy
+            //GlossyReflective RMat = new GlossyReflective();
+            //RMat.AmbientBRDF.Kd = 0.0f;
+            //RMat.DiffuseBRDF.Kd = 0.0f;
+            //RMat.DiffuseBRDF.Cd = PreDefColor.WhiteColor;
+            //RMat.GlossySpecularBRDF.Ks = 0.9f;
+            //RMat.GlossySpecularBRDF.Cs = PreDefColor.WhiteColor;
+            //RMat.GlossySpecularBRDF.Exp = 1;
+            //Sampler GlossySampler = new MultiJittered(TestData.TestSampleCount);
+            //RMat.GlossySpecularBRDF.SetSampler(ref GlossySampler);
+            //GlossySampler.MapSamplesToHemisphere(RMat.GlossySpecularBRDF.Exp);
+            //TestSphere1.Material = RMat;
+
             AddRenderObjects(ref TestSphere1);
 
             GeometryObject TestSphere2 = new Sphere(new Vector3D(75, 15, -130), 60.0);
-            TestSphere2.Color = new Vector3D(1, 1, 0);
+            TestSphere2.Color = PreDefColor.YellowColor;
             Matte SphereMat2 = new Matte();
             SphereMat2.AmbientBRDF.Kd = 1.0f;
             SphereMat2.AmbientBRDF.Cd = PreDefColor.WhiteColor;
             SphereMat2.DiffuseBRDF.Kd = 0.75f;
             SphereMat2.DiffuseBRDF.Cd = TestSphere2.Color;
+            SphereMat2.DiffuseBRDF.SetSampler(ref AmbientSampler);
             SphereMat2.SpecularBRDF.Ks = 0.25f;
             SphereMat2.SpecularBRDF.Exp = 2.0f;
             TestSphere2.Material = SphereMat2;
             AddRenderObjects(ref TestSphere2);
 
             GeometryObject TestPlane1 = new Plane(new Vector3D(0, 0, -200), new Vector3D(0.0, 1, 0.5));
-            TestPlane1.Color = new Vector3D(1, 1, 1);
+            TestPlane1.Color = PreDefColor.WhiteColor;
             Matte PlaneMat1 = new Matte();
             PlaneMat1.AmbientBRDF.Kd = 5.0f;
             PlaneMat1.AmbientBRDF.Cd = PreDefColor.WhiteColor;
@@ -99,6 +105,7 @@ namespace WPFRayTracing
             PlaneMat1.DiffuseBRDF.Cd = TestPlane1.Color;
             PlaneMat1.SpecularBRDF.Ks = 0.25f;
             PlaneMat1.SpecularBRDF.Exp = 2.0f;
+            PlaneMat1.DiffuseBRDF.SetSampler(ref AmbientSampler);
             TestPlane1.Material = PlaneMat1;
             AddRenderObjects(ref TestPlane1);
 
@@ -132,7 +139,7 @@ namespace WPFRayTracing
         {
             Vector3D RGBColor;
             Ray TestRay = new Ray();
-            TestRay.Direction = new Vector3D(0, 0, -1);
+            TestRay.Direction = TestData.MainRayDir;
 
             for(int VPixel = 0; VPixel < VP.VRes; ++VPixel)
             {
@@ -151,6 +158,7 @@ namespace WPFRayTracing
 
                     RGBColor /= VP.NumOfSample;
                     DisplayPixel(HPixel, VPixel, ref RGBColor);
+
                 }
             }
 

@@ -23,7 +23,7 @@ namespace WPFRayTracing
             if (SR.HitAnObject)
             {
                 SR.Ray = TestRay;
-                return SR.Material.Shading(SR);
+                return SR.Material.Shading(ref SR);
             }
             else
                 return WorldInstance.BackgroundColor;
