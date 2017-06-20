@@ -15,3 +15,5 @@ reference book:http://www.raytracegroundup.com/
 ## Dependencies:
 [MathNet.Numerics.3.11.0](http://www.mathdotnet.com/)
 
+## Note: Please Use Brach"Preview" to run demo.
+
